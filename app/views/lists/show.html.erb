@@ -1,0 +1,23 @@
+
+<div>
+  <%= link_to "add bookmark", new_list_bookmark_path(@list) %>
+</div>
+
+<p style="color: green"><%= notice %></p>
+
+<% @list.movies.each do |movie| %>
+<%= movie.title %>
+<% end %>
+<div>
+  <%= link_to "Back to list", lists_path %>
+</div>
+
+
+
+<div>
+<% @list.bookmarks.each do |bookmark| %>
+<%= image_tag bookmark.movie.poster_url, alt: "movie poster" %>
+<%= bookmark.movie.overview %>
+<%= bookmark.comment %>
+<% end %>
+</div>
