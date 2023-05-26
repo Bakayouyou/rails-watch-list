@@ -1,9 +1,18 @@
-<div>
-  <h1>My lists</h1>
-  <%= link_to "Create a movie list", new_list_path  %>
-</div>
-<div>
- <% @lists.each do |list| %>
-    <li><%= link_to list.name, list_path(list) %></li>
-  <% end %>
-</div>
+<div class="container">
+  <div class="card-category"
+    style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://media.cnn.com/api/v1/images/stellar/prod/200619162441-list-making-stock.jpg?q=w_3000,h_2002,x_0,y_0,c_fill)">
+    My lists
+  </div class="list-group">
+  <%= link_to "Create a movie list" , new_list_path ,
+    class: "list-group-item list-group-item-action list-group-item-warning" %>
+    <div>
+      <% @lists.each do |list| %>
+        <div class="list-group" id="list-tab" role="tablist">
+          <li class="list-group-item list-group-item-primary">
+            <%= link_to list.name, list_path(list) %>
+          </li>
+          <%= link_to "Delete" , list, class: 'btn btn-danger' ,data: {turbo_method: :delete,
+            turbo_confirm: 'Are you sure?' } %>
+        </div>
+        <% end %>
+    </div>

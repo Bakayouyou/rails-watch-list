@@ -1,23 +1,26 @@
+<div class="bg-white">
+<h1 class="inline"><%= @list.name %></h1>
+  <div class="d-flex justify-content-around ">
+    <%= link_to "add bookmark", new_list_bookmark_path(@list), class: 'btn btn-success' %>
 
-<div>
-  <%= link_to "add bookmark", new_list_bookmark_path(@list) %>
-</div>
+    <%= link_to "Back to list", lists_path, class: 'btn blue' %>
+  </div>
 
-<p style="color: green"><%= notice %></p>
+  <div class="inline" >
+  <p style="color: green"><%= notice %></p>
+  </div>
 
-<% @list.movies.each do |movie| %>
-<%= movie.title %>
-<% end %>
-<div>
-  <%= link_to "Back to list", lists_path %>
-</div>
-
-
-
-<div>
-<% @list.bookmarks.each do |bookmark| %>
-<%= image_tag bookmark.movie.poster_url, alt: "movie poster" %>
-<%= bookmark.movie.overview %>
-<%= bookmark.comment %>
-<% end %>
+  <div class="card container border-info mb-3 " style="width: 350px">
+  <% @list.bookmarks.each do |bookmark| %>
+    <div class="card-header row justify-content-between text-white bg-info mb-3 shadow p-3 mb-5 rounded">
+      <div class="card-body" , width= "100px">
+        <%= image_tag bookmark.movie.poster_url, alt: "movie poster", width: "250px" %>
+        <h5 class='m-0'><%= bookmark.movie.title %></h5>
+        <%= bookmark.movie.overview %>
+        <p class="card-text"><%= bookmark.comment %></p>
+        <%= link_to "Delete", bookmark_path(bookmark), class: 'btn btn-danger',data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+      </div>
+    </div>
+  <div>
+  <% end %>
 </div>
