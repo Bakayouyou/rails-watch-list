@@ -1,26 +1,31 @@
 <div class="bg-white">
-<h1 class="inline"><%= @list.name %></h1>
-  <div class="d-flex justify-content-around ">
-    <%= link_to "add bookmark", new_list_bookmark_path(@list), class: 'btn btn-success' %>
+    <h1 class="d-flex justify-content-center"><%= @list.name %></h1>
+   <div class="d-flex justify-content-center my-4">
+    <%= link_to "add bookmark", new_list_bookmark_path(@list), class: 'btn blue' %>
 
     <%= link_to "Back to list", lists_path, class: 'btn blue' %>
   </div>
 
-  <div class="inline" >
-  <p style="color: green"><%= notice %></p>
-  </div>
 
-  <div class="card container border-info mb-3 " style="width: 350px">
-  <% @list.bookmarks.each do |bookmark| %>
-    <div class="card-header row justify-content-between text-white bg-info mb-3 shadow p-3 mb-5 rounded">
-      <div class="card-body" , width= "100px">
-        <%= image_tag bookmark.movie.poster_url, alt: "movie poster", width: "250px" %>
-        <h5 class='m-0'><%= bookmark.movie.title %></h5>
-        <%= bookmark.movie.overview %>
-        <p class="card-text"><%= bookmark.comment %></p>
-        <%= link_to "Delete", bookmark_path(bookmark), class: 'btn btn-danger',data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+
+
+  <div class=" container row m-5">
+    <% @list.bookmarks.each do |bookmark| %>
+
+      <div class="col-12 col-sm-6 mb-4 " data-aos="zoom-in" >
+        <div class="bg-white rounded shadow h-100">
+          <div class="p-3 rounded-bottom d-flex flex-column">
+          <%= image_tag bookmark.movie.poster_url, alt: "movie poster" ,class: "movie-img rounded-top" %>
+            <strong><%= bookmark.movie.title %> <span class="text-muted font-weight-normal">• <i class="fas fa-star star-yellow"></i></span></strong>
+            <small class="text-muted"><%= bookmark.movie.overview %></small>
+            <div class="d-flex align-items-end justify-content-between pt-4">
+              <div>
+                <i class="fas fa-quote-left me-2"></i><small class="flex-grow-1"><%= bookmark.comment %></small>
+              </div>
+              <small class="text-right flex-shrink-0"><%= link_to "delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove"}, class: 'text-danger' %></small>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  <div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
